@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private Text debugMessage;
 
-    public float playerSpeed = 5f;
+    public float playerSpeed = 1f;
 
     private Animator anim;
 
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 moveDir = new Vector3(moveInput.x, 0f, moveInput.y);
             transform.position += moveDir * Time.deltaTime * playerSpeed;
+            debugMessage.text = transform.position.ToString();
         }
     }
 }
