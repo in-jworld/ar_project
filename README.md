@@ -1,7 +1,9 @@
 # AR Project
 
+## Issues
+- How to match player moving direction depending on AR Camera direction with virtual joystick
+- How to deploy enemy spawning cave depending on the edge of the ground plane recognised
 ## Progress
-
 |Functions|Progress|||||||
 |---|---|---|---|---|---|---|---|
 |||0|1|2|3|4|5|
