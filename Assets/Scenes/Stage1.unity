@@ -1579,6 +1579,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 7973053292817312608, guid: 4a522501fc22967418da32872dd1ae39,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973053292817312608, guid: 4a522501fc22967418da32872dd1ae39,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7973053292817312608, guid: 4a522501fc22967418da32872dd1ae39,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8679245
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a522501fc22967418da32872dd1ae39, type: 3}
 --- !u!224 &4493099328289852812 stripped
