@@ -11,6 +11,7 @@
 |**1. Ground Plane**||||||x||
 |- Ground Recognition|||||||x|
 |- Player Spawning|||||||x|
+|- Bullet Spawning|||||||x|
 |- Enemy Spawning||x||||||
 |**2. Animation**||||||||
 |- Player|||||x|||
@@ -37,6 +38,6 @@
 |- UI||||||||
 |- Player||||||||
 |-- Run||||||||
-|-- Shoot||||||||
+|-- Shoot|||||||x|
 |-- Hit||||||||
 
