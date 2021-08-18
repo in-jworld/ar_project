@@ -26,6 +26,7 @@
 |- ~~Movement Joystick~~|||||||x|
 |- Rotation Joystick||x||||||
 |- Raycasting for movement|||||||x|
+|- Raycasting for rotation|||||||x|
 |- Settings|||x|||||
 |- Attack button||x||||||
 |**4. Input System**||||||||
