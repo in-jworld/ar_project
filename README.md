@@ -1,5 +1,5 @@
 # AR Project
-
+~~sdfsdfdsf~~
 ## Issues
 - How to debug easily using DroidCam - which means DroidCam doesn't work for Ground Plane Recognition
 - How to match player moving direction depending on AR Camera direction with virtual joystick
@@ -23,6 +23,8 @@
 |3.2  Stage Scene||||||||
 |- Stage message||||||x||
 |- Movement Joystick|||||||x|
+|- Rotation Joystick||x||||||
+|- Raycasting for movement|||||||x|
 |- Settings|||x|||||
 |- Attack button||x||||||
 |**4. Input System**||||||||
