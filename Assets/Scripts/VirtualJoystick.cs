@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class VirtualJoystick : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private RectTransform lever;
     private RectTransform rectTransform;
@@ -21,7 +21,7 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         rectTransform = GetComponent<RectTransform>();
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
+   /* public void OnBeginDrag(PointerEventData eventData)
     {
         ControlJoystickLever(eventData);
         isInput = true;
@@ -51,13 +51,13 @@ public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         controller.Move(inputDirection);
         Debug.Log(inputDirection.x + " / " + inputDirection.y);
-    }
+    }*/
 
     private void Update()
     {
         if(isInput)
         {
-            InputControlVector();
+            //InputControlVector();
         }
     }
 }

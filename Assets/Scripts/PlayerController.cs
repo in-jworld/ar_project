@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     private Text debugMessage;
 
     [Header("SPEEDS")]
-    public float playerSpeed = 1f;
+    public float movementSpeed = 1f;
+    public float rotationSpeed = 50f;
 
     [Header("SHOOTING")]
     public float fireRate = 0.08f;
@@ -43,15 +44,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Move(Vector3 inputDirection)
+    public void Move(Vector3 pos, Vector3 normal)
     {
+        // Position
+        transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * movementSpeed);
+
+        // Rotation
         // Case1
-        /*transform.Translate(new Vector3(inputDirection.normalized.x, 0f, inputDirection.normalized.y));
-        transform.position *= Time.deltaTime * playerSpeed;*/
+        //transform.LookAt(pos);
         // Case2
-        //transform.position += new Vector3(inputDirection.normalized.x, 0f, inputDirection.normalized.y) * Time.deltaTime * playerSpeed;
+        /*Vector3 direction = pos - transform.position;
+        Quaternion toRot = Quaternion.FromToRotation(transform.forward, direction);
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRot, Time.deltaTime * rotationSpeed);*/
         // Case3
-        transform.position = Vector3.MoveTowards(transform.position, inputDirection, Time.deltaTime * playerSpeed);
+        Vector3 direction = pos - transform.position;
+        Quaternion toRot = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRot, Time.deltaTime * rotationSpeed);
+
+        //transform.rotation = Quaternion.FromToRotation(transform.position, pos);
 
         //
         /*Vector3 moveInput = inputDirection;//new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));

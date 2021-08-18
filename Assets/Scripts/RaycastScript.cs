@@ -19,8 +19,8 @@ public class RaycastScript : MonoBehaviour
         {
             Debug.Log("Ground Hit!");
             debugMessage.text = hit.point.ToString();
-
-            player.Move(hit.point);
+            
+            player.Move(hit.point, hit.normal);
         }
     }
 }
