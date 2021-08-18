@@ -1,8 +1,9 @@
 # AR Project
 
 ## Issues
-- How to debug easily using DroidCam - which means DroidCam doesn't work for Ground Plane Recognition
-- How to match player moving direction depending on AR Camera direction with virtual joystick
+- ~~How to debug easily using DroidCam - which means DroidCam doesn't work for Ground Plane Recognition~~
+- ~~How to match player moving direction depending on AR Camera direction with virtual joystick~~
+- How to rotate player using virtual joystick for rotation only
 - How to deploy enemy spawning cave depending on the edge of the ground plane recognised
 ## Progress
 |Functions|Progress|||||||
