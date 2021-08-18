@@ -43,9 +43,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Move(Vector2 inputDirection)
+    public void Move(Vector3 inputDirection)
     {
-        Vector3 moveInput = inputDirection;//new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+        // Case1
+        /*transform.Translate(new Vector3(inputDirection.normalized.x, 0f, inputDirection.normalized.y));
+        transform.position *= Time.deltaTime * playerSpeed;*/
+        // Case2
+        //transform.position += new Vector3(inputDirection.normalized.x, 0f, inputDirection.normalized.y) * Time.deltaTime * playerSpeed;
+        // Case3
+        transform.position = Vector3.MoveTowards(transform.position, inputDirection, Time.deltaTime * playerSpeed);
+
+        //
+        /*Vector3 moveInput = inputDirection;//new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         bool isMoving = moveInput.magnitude != 0;
         anim.SetBool("isMoving", isMoving);
         if (isMoving)
@@ -53,7 +62,7 @@ public class PlayerController : MonoBehaviour
             Vector3 moveDir = new Vector3(moveInput.x, 0f, moveInput.y);
             transform.position += moveDir * Time.deltaTime * playerSpeed;
             debugMessage.text = transform.position.ToString();
-        }
+        }*/
     }
 
     public void AttackBtnDown()
