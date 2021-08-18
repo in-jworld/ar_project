@@ -22,7 +22,7 @@
 |- Logo||||||x||
 |3.2  Stage Scene||||||||
 |- Stage message||||||x||
-|- ~~Movement Joystick|||||||x~~|
+|- ~~Movement Joystick~~|||||||x|
 |- Rotation Joystick||x||||||
 |- Raycasting for movement|||||||x|
 |- Settings|||x|||||
