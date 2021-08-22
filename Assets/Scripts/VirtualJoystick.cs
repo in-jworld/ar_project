@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class VirtualJoystick : MonoBehaviour//, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class VirtualJoystick : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private RectTransform lever;
     private RectTransform rectTransform;
 
     [SerializeField, Range(10, 150)] private float leverRange = 65;
 
-    private Vector2 inputDirection = Vector2.zero;
-    private bool isInput = false;
+    public Vector2 inputDirection = Vector2.zero;
+    public bool isInput = false;
 
     [SerializeField] private PlayerController controller;
 
@@ -21,7 +21,7 @@ public class VirtualJoystick : MonoBehaviour//, IBeginDragHandler, IDragHandler,
         rectTransform = GetComponent<RectTransform>();
     }
 
-   /* public void OnBeginDrag(PointerEventData eventData)
+    public void OnBeginDrag(PointerEventData eventData)
     {
         ControlJoystickLever(eventData);
         isInput = true;
@@ -34,9 +34,11 @@ public class VirtualJoystick : MonoBehaviour//, IBeginDragHandler, IDragHandler,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        lever.anchoredPosition = Vector2.zero;
+        inputDirection = Vector2.zero;
+        lever.anchoredPosition = inputDirection;
         isInput = false;
-        controller.Move(Vector2.zero);
+        //controller.Move(Vector2.zero);
+        //controller.Rotate(Vector2.zero);
     }
 
     private void ControlJoystickLever(PointerEventData eventData)
@@ -49,15 +51,16 @@ public class VirtualJoystick : MonoBehaviour//, IBeginDragHandler, IDragHandler,
 
     private void InputControlVector()
     {
-        controller.Move(inputDirection);
+        //controller.Move(inputDirection);
+        //controller.Rotate(inputDirection);
         Debug.Log(inputDirection.x + " / " + inputDirection.y);
-    }*/
+    }
 
     private void Update()
     {
         if(isInput)
         {
-            //InputControlVector();
+            InputControlVector();
         }
     }
 }

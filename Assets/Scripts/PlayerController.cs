@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour
     private Transform player;
     [SerializeField]
     private Text debugMessage;
+    [SerializeField]
+    private VirtualJoystick joystick;
 
     [Header("SPEEDS")]
     public float movementSpeed = 1f;
-    public float rotationSpeed = 50f;
+    public float rotationSpeed = 200f;
 
     [Header("SHOOTING")]
     public float fireRate = 0.08f;
@@ -22,6 +24,10 @@ public class PlayerController : MonoBehaviour
     [Header("AUDIO")]
     public AudioClip shootSFX;
 
+    public bool left = false;
+    public bool right = false;
+    public bool isRotating = false;
+    public bool isMoving = false;
     bool isShooting = false;
     bool canShoot = true;
     Animator anim;
@@ -42,28 +48,29 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine("Attack");
         }
+        if (isRotating)
+            RotatePlayer();
     }
 
     public void Move(Vector3 pos, Vector3 normal)
     {
-        // Position
-        transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * movementSpeed);
+        
+        Vector3 moveInput = pos;
+        isMoving = moveInput.magnitude != 0;
+        anim.SetBool("isMoving", isMoving);
+        if (isMoving && !isRotating)
+        {
+            // Position
+            transform.position = Vector3.MoveTowards(transform.position, pos, Time.deltaTime * movementSpeed);
 
-        // Rotation
-        // Case1
-        //transform.LookAt(pos);
-        // Case2
-        /*Vector3 direction = pos - transform.position;
-        Quaternion toRot = Quaternion.FromToRotation(transform.forward, direction);
-        transform.rotation = Quaternion.Lerp(transform.rotation, toRot, Time.deltaTime * rotationSpeed);*/
-        // Case3
-        Vector3 direction = pos - transform.position;
-        Quaternion toRot = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Lerp(transform.rotation, toRot, Time.deltaTime * rotationSpeed);
+            // Rotation
+            Vector3 direction = pos - transform.position;
+            Quaternion toRot = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRot, Time.deltaTime * rotationSpeed);
+        }
 
-        //transform.rotation = Quaternion.FromToRotation(transform.position, pos);
 
-        //
+        // movement(Legacy)
         /*Vector3 moveInput = inputDirection;//new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         bool isMoving = moveInput.magnitude != 0;
         anim.SetBool("isMoving", isMoving);
@@ -73,6 +80,36 @@ public class PlayerController : MonoBehaviour
             transform.position += moveDir * Time.deltaTime * playerSpeed;
             debugMessage.text = transform.position.ToString();
         }*/
+    }
+
+    //public void Rotate(Vector3 rayPos, Vector3 closestPos, Vector2 inputDirection)
+    public void Rotate(Vector3 pos)
+    {
+        Vector3 rotationInput = pos;
+        bool isRotating = rotationInput.magnitude != 0;
+        if (isRotating)
+        {
+            Vector3 direction = pos - transform.position;
+            Quaternion toRot = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Lerp(transform.rotation, toRot, 1000f* Time.deltaTime * rotationSpeed);
+        }
+        
+
+        /*Vector3 joystickPos = new Vector3(joystick.inputDirection.x,
+                    0f,
+                    joystick.inputDirection.y);
+        transform.rotation = Quaternion.LookRotation(transform)*/
+
+        /*Quaternion rot = Quaternion.RotateTowards(transform.rotation, forwardDirection, 180f*//*Time.deltaTime * rotationSpeed*//*);
+        transform.rotation = rot;*/
+
+        /*Vector3 direction = rayPos - closestPos;
+        Quaternion toRot = Quaternion.LookRotation(direction);
+        Quaternion fromRot = Quaternion.LookRotation(new Vector3(inputDirection.x, 0f, inputDirection.y));
+        transform.rotation = Quaternion.Lerp(fromRot, toRot, Time.deltaTime * rotationSpeed);*/
+        //transform.rotation = Quaternion.Lerp(transform.rotation, toRot, Time.deltaTime * rotationSpeed);
+        //Quaternion toRot = Quaternion.RotateTowards(direction, new Vector3(inputDirection.x, 0f, inputDirection.y));
+        //transform.rotation = toRot;
     }
 
     public void AttackBtnDown()
@@ -103,5 +140,41 @@ public class PlayerController : MonoBehaviour
 
         // Set shot cooldown as true
         canShoot = true;
+    }
+
+    public void LeftDown()
+    {
+        isRotating = true;
+        left = true;
+        right = !left;
+    }
+    public void LeftUp()
+    {
+        isRotating = false;
+        left = false;
+    }
+
+    public void RightDown()
+    {
+        isRotating = true;
+        right = true;
+        left = !right;
+    }
+    public void RightUp()
+    {
+        isRotating = false;
+        right = false;
+    }
+
+    public void RotatePlayer()
+    {
+        if (left)
+        {
+            transform.Rotate(new Vector3(0f, -Time.deltaTime * rotationSpeed, 0f));
+        }
+        else
+        {
+            transform.Rotate(new Vector3(0f, Time.deltaTime * rotationSpeed, 0f));
+        }
     }
 }
